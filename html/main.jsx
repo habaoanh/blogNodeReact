@@ -10,12 +10,17 @@ class Signin extends React.Component {
     };
   }
   signIn() {
-    alert(
-      "Email address is " +
-        this.state.email +
-        " Password is " +
-        this.state.password
-    );
+    axios
+      .post("/signin", {
+        email: this.state.email,
+        password: this.state.password
+      })
+      .then(function(response) {
+        console.log(response);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
   }
   handleEmailChange(e) {
     this.setState({ email: e.target.value });
