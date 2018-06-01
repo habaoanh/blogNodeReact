@@ -20,5 +20,28 @@ module.exports = {
         }
       );
     });
+  },
+  validateSignIn: function(username, password, callback) {
+    MongoClient.connect(url, function(err, client) {
+      if (err) throw err;
+
+      var db = client.db("Blog");
+      console.log(username, password);
+      db.collection("user").findOne(
+        {
+          email: username,
+          password: password
+        },
+        function(err, result) {
+          if (result == null) {
+            console.log("returning false");
+            callback(false);
+          } else {
+            console.log("returning true");
+            callback(true);
+          }
+        }
+      );
+    });
   }
 };
