@@ -1,5 +1,6 @@
 var express = require("express");
 var bodyParser = require("body-parser");
+var user = require("./user");
 var path = require("path");
 
 var app = express();
@@ -14,6 +15,11 @@ app.post("/signin", function(req, res) {
   } else {
     res.send("Failure");
   }
+});
+
+app.post("/signup", function(req, res) {
+  user.signup("", "", "");
+  console.log(res);
 });
 app.listen(7777, function() {
   console.log("Started listening on port", 7777);
